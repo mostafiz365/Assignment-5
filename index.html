@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github Issue Tracker | SingIn Page</title>
+    <link
+      rel="shortcut icon"
+      href="assets/github-logo.png"
+      type="image/x-icon"
+    />
+
+    <!-- Tailwind & Daisy add code -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- font Awesome cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      * {
+        font-family: "Geist", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen max-w-lg bg-[#FFFFFF] shadow mx-auto p-6">
+    <div class="logo mx-auto pt-4 space-y-4">
+      <img class="mx-auto" src="assets/github-logo.png" alt="" />
+      <h2 class="font-semibold text-2xl text-[#1F2937] text-center">
+        GitHub Issues Tracker
+      </h2>
+      <p class="text-[#64748B] text-center">Sign in to manage your issues</p>
+    </div>
+    <div class="form pt-4">
+      <div class="card w-full mx-auto">
+        <div class="card-body">
+          <fieldset class="fieldset">
+            <label class="label font-medium text-[16px] text-[#1F2937]"
+              >Username</label
+            >
+            <input
+              id="name-input"
+              type="text"
+              class="input w-full mb-4 rounded-lg"
+              placeholder="Enter Username"
+            />
+            <label class="label font-medium text-[16px] text-[#1F2937]"
+              >Password</label
+            >
+            <input
+              id="pin-input"
+              type="password"
+              class="input w-full mb-4 rounded-lg"
+              placeholder="Enter Password"
+            />
+            <div></div>
+            <button id="singIn-btn" class="btn btn-primary mt-4 p-4 rounded-lg">
+              Sing In
+            </button>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <h5 class="text-center font-medium text-black mb-6">OR</h5>
+    <p class="text-center text-[14px] text-[#64748B]">Demo Credentials:</p>
+    <div class="bg-[#F8FAFC] p-6 text-center">
+      <h6 class="font-semibold text-[#1F2937]">Username: <span class="text-[#1F2937]">admin</span></h6>
+      <h6 class="font-semibold text-[#1F2937]">Password: <span class="text-[#1F2937]">admin123</span></h6>
+    </div>
+
+    <script src="script/login.js"></script>
+  </body>
+</html>
