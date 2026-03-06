@@ -1,3 +1,8 @@
+const createElement = (arr) => {
+    const htmlElement = arr.map((el) => `<span class="badge badge-soft badge-warning">${el}</span>`);
+    return(htmlElement.join(" "));
+};
+
 const loadIssuesCard = () => {
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
     .then(res => res.json())
@@ -33,10 +38,8 @@ const displayIssuesCard = (cards) => {
                     <h4 class="font-semibold text-[14px] text-[#1F2937]"> ${card.title} </h4>
                     <p class="text-[12px] text-[#64748B] line-clamp-2">${card.description}</p>
 
-                    <div>
-                        <div class="badge badge-soft badge-warning">Warning</div>
-                        <div class="badge badge-soft badge-error">Error</div>
-                    </div>
+                    <div>${createElement(card.labels)}</div>
+                    
 
                     <hr class="text-[#dddddd]">
 
