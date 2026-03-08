@@ -1,5 +1,5 @@
 const createElement = (arr) => {
-    const htmlElement = arr.map((el) => `<span class="badge badge-soft badge-warning">${el}</span>`);
+    const htmlElement = arr.map((el) => `<span class="${el === 'bug'? 'badge badge-soft badge-error' : 'badge badge-soft badge-warning'}">${el}</span>`);
     return(htmlElement.join(" "));
 };
 // button toggle-------------
@@ -28,9 +28,13 @@ const issueCount = document.getElementById('issue-count');
 const loadingSpinner = document.getElementById('loadingSpinner');
 // Show all Open Card --------
 document.getElementById("tab-open").addEventListener('click',function(){
+    loadingSpinner.classList.remove('hidden');
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
     .then(res => res.json())
-    .then(data => displayOpenCard(data.data));
+    .then(data => {
+        loadingSpinner.classList.add('hidden');
+        displayOpenCard(data.data)
+    });
 });
 const displayOpenCard = (cards) =>{
     const issuesContainer = document.getElementById('issues-container');
@@ -42,7 +46,7 @@ const displayOpenCard = (cards) =>{
     openCards.forEach(card => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div onclick="loadIssuesDetail(${card.id})" class="card bg-[#FFFFFF] p-4 h-full space-y-3 border-t-2 border-green-500">
+        <div onclick="loadIssuesDetail(${card.id})" class="card bg-[#FFFFFF] p-4 h-full space-y-3 border-t-3 border-green-500">
                     <div class="flex justify-between items-center">
                     <div>${card.status === 'open' ? `<img src="assets/Open-Status.png">` : `<img src="assets/Closed-Status.png">`}</div>
                         <p class="font-medium text-[12px] ${card.priority === 'high'? 'badge badge-soft badge-error' : card.priority==='medium'? 'badge badge-soft badge-warning' : 'badge bg-[#EEEFF2]'}">${card.priority}</p>
@@ -65,9 +69,14 @@ const displayOpenCard = (cards) =>{
 };
 // Show all Closed Card ------------
 document.getElementById("tab-closed").addEventListener('click',function(){
+    loadingSpinner.classList.remove('hidden');
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
     .then(res => res.json())
-    .then(data => displayClosedCard(data.data));
+    .then(data => {
+        loadingSpinner.classList.add('hidden');
+        displayClosedCard(data.data);
+    })
+           
 });
 const displayClosedCard = (cards) =>{
     const issuesContainer = document.getElementById('issues-container');
@@ -79,7 +88,7 @@ const displayClosedCard = (cards) =>{
     closedCards.forEach(card => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div onclick="loadIssuesDetail(${card.id})" class="card bg-[#FFFFFF] p-4 h-full space-y-3 border-t-2 border-purple-500">
+        <div onclick="loadIssuesDetail(${card.id})" class="card bg-[#FFFFFF] p-4 h-full space-y-3 border-t-3 border-purple-500">
                     <div class="flex justify-between items-center">
                     <div>${card.status === 'open' ? `<img src="assets/Open-Status.png">` : `<img src="assets/Closed-Status.png">`}</div>
                         <p class="font-medium text-[12px] ${card.priority === 'high'? 'badge badge-soft badge-error' : card.priority==='medium'? 'badge badge-soft badge-warning' : 'badge bg-[#EEEFF2]'}">${card.priority}</p>
@@ -168,7 +177,7 @@ const displayIssuesCard = (cards) => {
     cards.forEach(card => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div onclick="loadIssuesDetail(${card.id})" class="card bg-[#FFFFFF] p-4 h-full space-y-3 ${card.status === 'open' ? 'border-t-2 border-green-500' : 'border-t-2 border-purple-500'}">
+        <div onclick="loadIssuesDetail(${card.id})" class="card bg-[#FFFFFF] p-4 h-full space-y-3 ${card.status === 'open' ? 'border-t-3 border-green-500' : 'border-t-3 border-purple-500'}">
                     <div class="flex justify-between items-center">
                     <div>${card.status === 'open' ? `<img src="assets/Open-Status.png">` : `<img src="assets/Closed-Status.png">`}</div>
                         <p class="font-medium text-[12px] ${card.priority === 'high'? 'badge badge-soft badge-error' : card.priority==='medium'? 'badge badge-soft badge-warning' : 'badge bg-[#EEEFF2]'}">${card.priority}</p>
@@ -200,6 +209,7 @@ fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValu
 .then(res => res.json())
 .then((data) => {
     const allIssues = data.data;
-    displayIssuesCard(allIssues);
+    const filterIssues = allIssues.filter((card) => card.title.toLowerCase().includes(searchValue));
+    displayIssuesCard(filterIssues);
 });
 });
