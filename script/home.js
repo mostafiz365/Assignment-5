@@ -157,3 +157,16 @@ const displayIssuesCard = (cards) => {
     })
 };
 loadIssuesCard();
+
+
+document.getElementById('btn-search').addEventListener('click', () =>{
+    const inputSearch = document.getElementById('input-search');
+    const searchValue = inputSearch.value.trim().toLowerCase();
+
+fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+.then(res => res.json())
+.then((data) => {
+    const allIssues = data.data;
+    displayIssuesCard(allIssues);
+});
+});
