@@ -60,7 +60,7 @@ const displayOpenCard = (cards) =>{
                     <hr class="text-[#dddddd]">
 
                     <p class="text-[12px] text-[#64748B]">${card.author}</p>
-                    <p class="text-[12px] text-[#64748B]">${card.updatedAt}</p>
+                    <p class="text-[12px] text-[#64748B]">${card.createdAt}</p>
         </div>
         `
 
@@ -102,7 +102,7 @@ const displayClosedCard = (cards) =>{
                     <hr class="text-[#dddddd]">
 
                     <p class="text-[12px] text-[#64748B]">${card.author}</p>
-                    <p class="text-[12px] text-[#64748B]">${card.updatedAt}</p>
+                    <p class="text-[12px] text-[#64748B]">${card.createdAt}</p>
         </div>
         `
 
@@ -191,7 +191,7 @@ const displayIssuesCard = (cards) => {
                     <hr class="text-[#dddddd]">
 
                     <p class="text-[12px] text-[#64748B]">${card.author}</p>
-                    <p class="text-[12px] text-[#64748B]">${card.updatedAt}</p>
+                    <p class="text-[12px] text-[#64748B]">${card.createdAt}</p>
         </div>
         `
 
