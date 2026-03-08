@@ -42,7 +42,7 @@ const displayOpenCard = (cards) =>{
     openCards.forEach(card => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div class="card bg-[#FFFFFF] p-4 h-full space-y-3 border-t-2 border-green-500">
+        <div onclick="loadIssuesDetail(${card.id})" class="card bg-[#FFFFFF] p-4 h-full space-y-3 border-t-2 border-green-500">
                     <div class="flex justify-between items-center">
                     <div>${card.status === 'open' ? `<img src="assets/Open-Status.png">` : `<img src="assets/Closed-Status.png">`}</div>
                         <p class="font-medium text-[12px] ${card.priority === 'high'? 'badge badge-soft badge-error' : card.priority==='medium'? 'badge badge-soft badge-warning' : 'badge bg-[#EEEFF2]'}">${card.priority}</p>
@@ -79,7 +79,7 @@ const displayClosedCard = (cards) =>{
     closedCards.forEach(card => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div class="card bg-[#FFFFFF] p-4 h-full space-y-3 border-t-2 border-purple-500">
+        <div onclick="loadIssuesDetail(${card.id})" class="card bg-[#FFFFFF] p-4 h-full space-y-3 border-t-2 border-purple-500">
                     <div class="flex justify-between items-center">
                     <div>${card.status === 'open' ? `<img src="assets/Open-Status.png">` : `<img src="assets/Closed-Status.png">`}</div>
                         <p class="font-medium text-[12px] ${card.priority === 'high'? 'badge badge-soft badge-error' : card.priority==='medium'? 'badge badge-soft badge-warning' : 'badge bg-[#EEEFF2]'}">${card.priority}</p>
@@ -127,6 +127,39 @@ const loadIssuesCard = () => {
 // "createdAt": "2024-01-15T10:30:00Z",
 // "updatedAt": "2024-01-15T10:30:00Z"
 // },
+const loadIssuesDetail = async (id) => {
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    const res = await fetch(url);
+    const details = await res.json();
+    displayIssuesDetails(details.data);
+};
+
+const displayIssuesDetails = (card) =>{
+    const showDetails = document.getElementById('details-container');
+    showDetails.innerHTML = `
+    <div class="space-y-6">
+    <h4 class="font-semibold text-[16px] text-[#1F2937]"> ${card.title} </h4>
+    <div class="flex gap-3 items-center">
+    <p class="${card.status === 'open' ? 'badge bg-green-500 text-white' : 'badge bg-purple-500 text-white'}">${card.status}</p>
+    <p class="text-[12px] text-[#64748B]">${card.assignee}</p>
+    <p class="text-[12px] text-[#64748B]">${card.updatedAt}</p>
+    </div>
+    <div>${createElement(card.labels)}</div>
+    <p class="text-[16px] text-[#64748B]">${card.description}</p>
+    <div class="grid grid-cols-2 bg-[#F8FAFC] p-3 rounded-lg">
+    <div>
+    <p class="text-[16px] text-[#64748B]">Assignee:</p>
+    <h5 class="font-semibold text-[16px] text-[#1F2937]">${card.assignee}</h5>
+    </div>
+    <div>
+    <p class="text-[16px] text-[#64748B]">Priority:</p>
+    <p class="font-medium text-[12px] ${card.priority === 'high'? 'badge badge-soft badge-error' : card.priority==='medium'? 'badge badge-soft badge-warning' : 'badge bg-[#EEEFF2]'}">${card.priority}</p>
+    </div>
+    </div>
+    </div>
+    `;
+    document.getElementById('issues_modal').showModal();
+}
 
 const displayIssuesCard = (cards) => {
     const issuesContainer = document.getElementById('issues-container');
@@ -135,7 +168,7 @@ const displayIssuesCard = (cards) => {
     cards.forEach(card => {
         const div = document.createElement('div');
         div.innerHTML = `
-        <div class="card bg-[#FFFFFF] p-4 h-full space-y-3 ${card.status === 'open' ? 'border-t-2 border-green-500' : 'border-t-2 border-purple-500'}">
+        <div onclick="loadIssuesDetail(${card.id})" class="card bg-[#FFFFFF] p-4 h-full space-y-3 ${card.status === 'open' ? 'border-t-2 border-green-500' : 'border-t-2 border-purple-500'}">
                     <div class="flex justify-between items-center">
                     <div>${card.status === 'open' ? `<img src="assets/Open-Status.png">` : `<img src="assets/Closed-Status.png">`}</div>
                         <p class="font-medium text-[12px] ${card.priority === 'high'? 'badge badge-soft badge-error' : card.priority==='medium'? 'badge badge-soft badge-warning' : 'badge bg-[#EEEFF2]'}">${card.priority}</p>
