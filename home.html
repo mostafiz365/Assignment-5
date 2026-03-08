@@ -67,17 +67,17 @@
     </header>
 
     <main class="max-w-6xl mx-auto mt-16">
-        <div class="bg-[#FFFFFF] flex gap-5 p-6 rounded-lg">
-            <button class="btn btn-primary py-2 px-4 rounded-md">All</button>
-            <button class="btn bg-transparent border border-[#E4E4E7] py-2 px-4 rounded-md">Open</button>
-            <button class="btn bg-transparent border border-[#E4E4E7] py-2 px-4 rounded-md">Closed</button>
+        <div id="all-buttons" class="bg-[#FFFFFF] flex gap-5 p-6 rounded-lg">
+            <button id="tab-all" onclick="toggle('all'); loadIssuesCard();" class="bg-blue-500 text-white border border-[#E4E4E7] py-2 px-6 rounded-md cursor-pointer">All</button>
+            <button id="tab-open" onclick="toggle('open')" class="border border-[#E4E4E7] py-2 px-4 rounded-md cursor-pointer">Open</button>
+            <button id="tab-closed" onclick="toggle('closed')" class="border border-[#E4E4E7] py-2 px-4 rounded-md cursor-pointer">Closed</button>
         </div>
 
         <section class="bg-[#FFFFFF] flex justify-between items-center mt-5 p-6 rounded-lg" >
             <div class="flex gap-1">
                 <img class="w-12 h-12" src="assets/Aperture.png" alt="">
                 <div>
-                    <h5 class="font-semibold text-xl text-[#1F2937]"><span class="font-semibold text-xl text-[#1F2937]">0</span> Issues</h5>
+                    <h5 class="font-semibold text-xl text-[#1F2937]"><span id="issue-count" class="font-semibold text-xl text-[#1F2937]">0</span> Issues</h5>
                     <p class="text-[#64748B]">Track and manage your project issues</p>
                 </div>
 
@@ -99,9 +99,11 @@
         </section>
 
         <section class="bg-[#FBFBFB] p-6">
-            <div id="issues-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            <div id="issues-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">    
+            </div>
 
-                
+            <div id="loadingSpinner" class="h-[60vh] hidden flex justify-center items-center">
+              <span class="loading loading-spinner loading-xl"></span>
             </div>
         </section>
     </main>
